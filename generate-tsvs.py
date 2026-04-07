@@ -1,0 +1,50 @@
+import os
+
+base = r"C:\Users\madha\Documents\career-ops\.claude\worktrees\beautiful-curran\batch\tracker-additions"
+
+tsvs = [
+    ("169-optimal-ai.tsv", "169\t2026-04-07\tOptimal\tAI/ML Engineer (Python | LLM Agents)\tEvaluated\t4.3/5\t\u2705\t[169](reports/169-optimal-ai-ml-engineer-2026-04-07.md)\tHybrid NYC; agentic startup; patent alignment; \u2753 H1B \u2014 US Residents Only; confirm sponsorship"),
+    ("170-ra-capital.tsv", "170\t2026-04-07\tRA Capital Management\tSoftware Engineer, AI/ML\tEvaluated\t3.4/5\t\u274c\t[170](reports/170-ra-capital-management-software-engineer-ai-ml-2026-04-07.md)\tQuant/finance domain; LLM stack relevant but not core GenAI builder; \u2753 H1B"),
+    ("171-reyes-coca-cola.tsv", "171\t2026-04-07\tReyes Coca-Cola Bottling\tMachine Learning Engineer\tEvaluated\t2.8/5\t\u274c\t[171](reports/171-reyes-coca-cola-bottling-machine-learning-engineer-2026-04-07.md)\tCPG/distribution domain mismatch; traditional ML; skip"),
+    ("172-unisys.tsv", "172\t2026-04-07\tUnisys\tMachine Learning Engineer\tEvaluated\t2.9/5\t\u274c\t[172](reports/172-unisys-machine-learning-engineer-2026-04-07.md)\tEnterprise IT; clearance risk; domain mismatch; skip"),
+    ("173-google.tsv", "173\t2026-04-07\tGoogle\tSenior Software Engineer, AI/ML Networking\tEvaluated\t2.8/5\t\u274c\t[173](reports/173-google-senior-software-engineer-ai-ml-networking-2026-04-07.md)\tNetworking focus not GenAI; \u2705 H1B; poor archetype fit; skip"),
+    ("174-athenahealth.tsv", "174\t2026-04-07\tathenahealth\tSenior MLOps Engineer, Analytics & AI\tEvaluated\t3.8/5\t\u274c\t[174](reports/174-athenahealth-senior-mlops-engineer-2026-04-07.md)\tHealthcare MLOps fit; strong stack; \u2753 H1B \u2014 confirm"),
+    ("175-cognichip.tsv", "175\t2026-04-07\tCognichip\tSenior Software Engineer, Agentic AI Systems\tEvaluated\t4.4/5\t\u2705\t[175](reports/175-cognichip-senior-software-engineer-agentic-ai-2026-04-07.md)\tBEST MATCH \u2014 agentic AI startup; patent alignment; \u2705 H1B confirmed"),
+    ("176-pinnacle-medicines.tsv", "176\t2026-04-07\tPinnacle Medicines\tMachine Learning Engineer\tEvaluated\t2.6/5\t\u274c\t[176](reports/176-pinnacle-medicines-machine-learning-engineer-2026-04-07.md)\tSmall biotech; drug discovery ML domain gap; skip"),
+    ("177-crossing-hurdles.tsv", "177\t2026-04-07\tCrossing Hurdles\tMachine Learning Engineer (Remote Contract)\tEvaluated\t3.2/5\t\u274c\t[177](reports/177-crossing-hurdles-machine-learning-engineer-2026-04-07.md)\tContract role; H1B complex via staffing; skip"),
+    ("178-bcforward.tsv", "178\t2026-04-07\tBCforward\tAI/ML Engineer\tEvaluated\t2.9/5\t\u274c\t[178](reports/178-bcforward-ai-ml-engineer-2026-04-07.md)\tStaffing firm; end client unclear; H1B complex; skip"),
+    ("179-rivago.tsv", "179\t2026-04-07\tRivago Infotech\tAI/ML Engineer\tEvaluated\t2.7/5\t\u274c\t[179](reports/179-rivago-infotech-ai-ml-engineer-2026-04-07.md)\tIT staffing; low fit; skip"),
+    ("180-allspring.tsv", "180\t2026-04-07\tAllspring Global Investments\tAI Engineer\tEvaluated\t3.5/5\t\u274c\t[180](reports/180-allspring-global-investments-ai-engineer-2026-04-07.md)\tAsset management fintech; LLM fit moderate; \u2753 H1B \u2014 confirm"),
+    ("181-nuro.tsv", "181\t2026-04-07\tNuro\tSenior Software Engineer \u2013 GenAI Infrastructure & Agent Systems\tEvaluated\t4.0/5\t\u2705\t[181](reports/181-nuro-senior-software-engineer-genai-infrastructure-2026-04-07.md)\tRobotics AI startup; GenAI infra + agentic; \u2705 H1B confirmed"),
+    ("182-photon-dice.tsv", "182\t2026-04-07\tPhoton (via Dice)\tGen AI Engineer (New York, NY)\tEvaluated\t3.7/5\t\u274c\t[182](reports/182-jobs-via-dice-gen-ai-engineer-new-york-2026-04-07.md)\tDice posting via Photon; GenAI stack match; \u2753 H1B \u2014 confirm end client"),
+    ("183-dice-jersey.tsv", "183\t2026-04-07\tJobs via Dice\tGen AI/ML Engineer (Jersey City, NJ)\tEvaluated\t3.6/5\t\u274c\t[183](reports/183-jobs-via-dice-gen-ai-ml-engineer-jersey-city-2026-04-07.md)\tDice posting; end client unknown; confirm H1B"),
+    ("184-health-biz.tsv", "184\t2026-04-07\tHealth Business Solutions\tLLM Operations Engineer\tEvaluated\t3.3/5\t\u274c\t[184](reports/184-health-business-solutions-llm-operations-engineer-2026-04-07.md)\tHealthcare LLMOps; small company; \u2753 H1B unconfirmed"),
+    ("185-imo-health-chicago.tsv", "185\t2026-04-07\tIMO Health\tStaff AI Engineer (Chicago, IL)\tEvaluated\t4.1/5\t\u2705\t[185](reports/185-imo-health-staff-ai-engineer-chicago-2026-04-07.md)\tHealthcare AI staff; RAG+agentic+evals fit; \u2705 H1B confirmed; strong apply"),
+    ("186-dexian.tsv", "186\t2026-04-07\tDexian\tAI Engineer (Chicago, IL)\tEvaluated\t3.2/5\t\u274c\t[186](reports/186-dexian-ai-engineer-chicago-2026-04-07.md)\tStaffing/consulting; financial services client; H1B complex"),
+    ("187-consultnet.tsv", "187\t2026-04-07\tConsultNet\tSenior Software Engineer \u2013 Full Stack & GenAI\tEvaluated\t3.0/5\t\u274c\t[187](reports/187-consultnet-senior-software-engineer-fullstack-genai-2026-04-07.md)\tStaffing firm; end client unclear; H1B complex; borderline fit"),
+    ("188-amd.tsv", "188\t2026-04-07\tAMD\tStaff AI Research Engineer\tEvaluated\t3.1/5\t\u274c\t[188](reports/188-amd-staff-ai-research-engineer-2026-04-07.md)\tHardware/GPU focus; C++/GPU gaps are blockers; \u2705 H1B strong but tech gap"),
+    ("189-goliath-1.tsv", "189\t2026-04-07\tGoliath Partners (client #1)\tMachine Learning Engineer (SF Bay Area)\tEvaluated\t4.0/5\t\u2705\t[189](reports/189-goliath-partners-machine-learning-engineer-sf-1-2026-04-07.md)\tYC-backed client via headhunter; LLM/agentic fit; \u2753 H1B \u2014 confirm via client"),
+    ("190-goliath-2.tsv", "190\t2026-04-07\tGoliath Partners (client #2)\tMachine Learning Engineer (SF Bay Area)\tEvaluated\t3.9/5\t\u274c\t[190](reports/190-goliath-partners-machine-learning-engineer-sf-2-2026-04-07.md)\tUndisclosed client; strong stack fit; \u2753 H1B \u2014 confirm via client"),
+    ("191-dice-tech-tandem.tsv", "191\t2026-04-07\tTech Tandem (via Dice)\tGenAI/MLOps/NLP Engineer (Chicago, IL)\tEvaluated\t3.5/5\t\u274c\t[191](reports/191-jobs-via-dice-genai-mlops-nlp-engineer-chicago-2026-04-07.md)\tDice/staffing; end client unknown; MLOps fit moderate; confirm H1B"),
+    ("192-imo-health-remote.tsv", "192\t2026-04-07\tIMO Health\tStaff AI Engineer (Remote)\tEvaluated\t4.2/5\t\u2705\t[192](reports/192-imo-health-staff-ai-engineer-remote-2026-04-07.md)\tBest remote option; healthcare AI; RAG+agentic+evals; \u2705 H1B confirmed; apply immediately"),
+    ("193-cypress-group.tsv", "193\t2026-04-07\tThe Cypress Group\tSenior AI Software Engineer, Team Lead\tEvaluated\t3.2/5\t\u274c\t[193](reports/193-cypress-group-senior-ai-engineer-team-lead-2026-04-07.md)\tRecruitment placing at SF client; leadership heavy; \u2753 H1B \u2014 confirm client"),
+    ("194-yo-it.tsv", "194\t2026-04-07\tYO IT Consulting\tMachine Learning Engineer (Remote)\tEvaluated\t2.2/5\t\u274c\t[194](reports/194-yo-it-consulting-ml-engineer-remote-2026-04-07.md)\tIT staffing; low fit; skip"),
+    ("195-wipro.tsv", "195\t2026-04-07\tWipro\tAI/ML Engineer (Minneapolis, MN)\tEvaluated\t2.8/5\t\u274c\t[195](reports/195-wipro-ai-ml-engineer-minneapolis-2026-04-07.md)\tIT services; consulting assignment; \u2705 H1B strong but not builder role"),
+    ("196-allcloud.tsv", "196\t2026-04-07\tAllCloud\tMachine Learning Engineer\tEvaluated\t3.0/5\t\u274c\t[196](reports/196-allcloud-ml-engineer-2026-04-07.md)\tCloud consulting; AWS focus; decent LLM fit but consulting; \u2753 H1B"),
+    ("197-spotify.tsv", "197\t2026-04-07\tSpotify\tMachine Learning Engineer\tEvaluated\t3.8/5\t\u274c\t[197](reports/197-spotify-ml-engineer-2026-04-07.md)\tMusic rec ML; relevant stack; remote; \u2753 H1B \u2014 confirm"),
+    ("198-harvard.tsv", "198\t2026-04-07\tHarvard Medical School\tMachine Learning Engineer\tSKIP\t2.8/5\t\u274c\t[198](reports/198-harvard-medical-school-ml-engineer-2026-04-07.md)\tHARD SKIP \u2014 Harvard cannot provide visa sponsorship"),
+    ("199-cnn.tsv", "199\t2026-04-07\tCNN (Warner Bros. Discovery)\tMachine Learning Engineer I\tEvaluated\t3.4/5\t\u274c\t[199](reports/199-cnn-ml-engineer-i-2026-04-07.md)\tMedia ML; CNN brand; \u2753 H1B \u2014 confirm WBD sponsorship"),
+    ("200-known-jack-jill.tsv", "200\t2026-04-07\tKnown (via Jack & Jill)\tAI/ML Engineer\tEvaluated\t4.0/5\t\u274c\t[200](reports/200-jack-jill-known-ai-ml-engineer-2026-04-07.md)\tTop comp $250K-$400K+equity; LLM/GenAI builder; \u2753 H1B \u2014 confirm before applying"),
+    ("201-sartre-group.tsv", "201\t2026-04-07\tSartre Group (Hedge Fund)\tSenior AI Engineer (NYC Hybrid)\tEvaluated\t4.1/5\t\u274c\t[201](reports/201-sartre-group-senior-ai-engineer-hedge-fund-2026-04-07.md)\tHedge fund AI NYC hybrid; strong comp; \u2753 H1B \u2014 confirm"),
+    ("202-deeprec-ai.tsv", "202\t2026-04-07\tDeepRec.ai\tSenior Machine Learning Engineer\tEvaluated\t4.0/5\t\u274c\t[202](reports/202-deeprec-ai-senior-ml-engineer-2026-04-07.md)\tML infra startup; strong stack alignment; \u2753 H1B \u2014 confirm sponsorship"),
+    ("203-taskrabbit.tsv", "203\t2026-04-07\tTaskRabbit\tSenior Machine Learning Engineer\tEvaluated\t3.7/5\t\u274c\t[203](reports/203-taskrabbit-senior-ml-engineer-2026-04-07.md)\tMarketplace ML; decent LLM fit; H1B \u2014 0 FY2026 filings; confirm"),
+    ("204-cisco.tsv", "204\t2026-04-07\tCisco\tSenior Software Engineer \u2013 AI/ML Infrastructure\tEvaluated\t3.9/5\t\u274c\t[204](reports/204-cisco-senior-sw-engineer-ai-ml-infra-2026-04-07.md)\tLarge enterprise AI infra; \u2705 H1B strong; comp may be below target"),
+    ("205-samsara.tsv", "205\t2026-04-07\tSamsara\tSenior Machine Learning Engineer\tEvaluated\t4.2/5\t\u274c\t[205](reports/205-samsara-senior-ml-engineer-2026-04-07.md)\tIoT/fleet AI; strong ML infra + LLM fit; \u2705 H1B 100% approval; apply immediately"),
+]
+
+for filename, content in tsvs:
+    path = os.path.join(base, filename)
+    with open(path, 'w', encoding='utf-8') as f:
+        f.write(content + '\n')
+
+print(f"Created {len(tsvs)} TSV files")

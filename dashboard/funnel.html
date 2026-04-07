@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Career-Ops Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0f1117; color: #e2e8f0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; min-height: 100vh; }
+  header { background: #1a1d2e; border-bottom: 1px solid #2d3148; padding: 20px 32px; display: flex; align-items: center; gap: 16px; }
+  header h1 { font-size: 1.4rem; font-weight: 700; color: #7c3aed; }
+  header span { color: #94a3b8; font-size: 0.875rem; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; padding: 24px 32px; }
+  .card { background: #1a1d2e; border: 1px solid #2d3148; border-radius: 12px; padding: 20px; }
+  .card h2 { font-size: 0.75rem; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 16px; }
+  .metric { font-size: 2.5rem; font-weight: 700; color: #e2e8f0; }
+  .metric-label { font-size: 0.875rem; color: #64748b; margin-top: 4px; }
+  .funnel-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #2d3148; }
+  .funnel-row:last-child { border-bottom: none; }
+  .funnel-stage { font-weight: 600; color: #e2e8f0; }
+  .funnel-count { font-size: 1.25rem; font-weight: 700; color: #7c3aed; }
+  .funnel-rate { font-size: 0.75rem; color: #64748b; }
+  canvas { max-height: 220px; }
+  .alert { background: #1e2a1e; border: 1px solid #16a34a; border-radius: 8px; padding: 14px 18px; margin: 0 32px 24px; color: #4ade80; font-size: 0.9rem; }
+  .alert strong { color: #86efac; }
+  .two-col { grid-column: span 2; }
+  @media (max-width: 640px) { .two-col { grid-column: span 1; } .grid { padding: 16px; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>Career-Ops Dashboard</h1>
+  <span>Generated 4/7/2026, 3:34:24 PM &bull; 208 total evaluations</span>
+</header>
+
+<div class="alert"><strong>54 jobs</strong> with score ≥ 4.0 and status "Evaluated" — ready to apply!</div>
+
+<div class="grid">
+
+  <!-- KPI Cards -->
+  <div class="card">
+    <h2>Total Evaluated</h2>
+    <div class="metric">208</div>
+    <div class="metric-label">All time</div>
+  </div>
+
+  <div class="card">
+    <h2>Applied</h2>
+    <div class="metric">0</div>
+    <div class="metric-label">0.0% of evaluated</div>
+  </div>
+
+  <div class="card">
+    <h2>Interviews</h2>
+    <div class="metric">0</div>
+    <div class="metric-label">N/A of applied</div>
+  </div>
+
+  <div class="card">
+    <h2>Offers</h2>
+    <div class="metric">0</div>
+    <div class="metric-label">N/A of interviews</div>
+  </div>
+
+  <!-- Pipeline Funnel -->
+  <div class="card">
+    <h2>Pipeline Funnel</h2>
+    
+    <div class="funnel-row">
+      <span class="funnel-stage">Evaluated</span>
+      <span>
+        <span class="funnel-count">197</span>
+        <span class="funnel-rate"> </span>
+      </span>
+    </div>
+    <div class="funnel-row">
+      <span class="funnel-stage">Applied</span>
+      <span>
+        <span class="funnel-count">0</span>
+        <span class="funnel-rate"> 0.0%</span>
+      </span>
+    </div>
+    <div class="funnel-row">
+      <span class="funnel-stage">Responded</span>
+      <span>
+        <span class="funnel-count">0</span>
+        <span class="funnel-rate"> N/A</span>
+      </span>
+    </div>
+    <div class="funnel-row">
+      <span class="funnel-stage">Interview</span>
+      <span>
+        <span class="funnel-count">0</span>
+        <span class="funnel-rate"> N/A</span>
+      </span>
+    </div>
+    <div class="funnel-row">
+      <span class="funnel-stage">Offer</span>
+      <span>
+        <span class="funnel-count">0</span>
+        <span class="funnel-rate"> N/A</span>
+      </span>
+    </div>
+  </div>
+
+  <!-- Score Distribution -->
+  <div class="card">
+    <h2>Score Distribution</h2>
+    <canvas id="scoreChart"></canvas>
+  </div>
+
+  <!-- H1B Breakdown -->
+  <div class="card">
+    <h2>H1B / Sponsorship</h2>
+    <canvas id="h1bChart"></canvas>
+  </div>
+
+  <!-- Top Companies -->
+  <div class="card">
+    <h2>Top Companies by Score</h2>
+    <canvas id="companyChart"></canvas>
+  </div>
+
+  <!-- Daily Rate -->
+  <div class="card two-col">
+    <h2>Daily Evaluation Rate (Last 30 Days)</h2>
+    <canvas id="dailyChart"></canvas>
+  </div>
+
+  <!-- Location Heatmap -->
+  <div class="card">
+    <h2>Location Breakdown</h2>
+    <canvas id="locChart"></canvas>
+  </div>
+
+</div>
+
+<script>
+const PURPLE = '#7c3aed';
+const VIOLET = '#a855f7';
+const GREEN  = '#16a34a';
+const RED    = '#dc2626';
+const GRAY   = '#475569';
+const chartDefaults = {
+  plugins: { legend: { labels: { color: '#94a3b8', font: { size: 11 } } } },
+  scales: {
+    x: { ticks: { color: '#64748b' }, grid: { color: '#2d3148' } },
+    y: { ticks: { color: '#64748b' }, grid: { color: '#2d3148' } },
+  },
+};
+
+// Score distribution
+new Chart(document.getElementById('scoreChart'), {
+  type: 'bar',
+  data: {
+    labels: ['0-1', '1-2', '2-3', '3-4', '4-5'],
+    datasets: [{ label: 'Jobs', data: [4,14,38,98,54], backgroundColor: [RED, RED, GRAY, VIOLET, PURPLE] }],
+  },
+  options: { ...chartDefaults, plugins: { ...chartDefaults.plugins, legend: { display: false } } },
+});
+
+// H1B pie
+new Chart(document.getElementById('h1bChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ['Sponsors', 'No Sponsor', 'Unknown'],
+    datasets: [{ data: [59, 0, 149], backgroundColor: [GREEN, RED, GRAY] }],
+  },
+  options: { plugins: { legend: { labels: { color: '#94a3b8' } } } },
+});
+
+// Top companies
+new Chart(document.getElementById('companyChart'), {
+  type: 'bar',
+  data: {
+    labels: ["WorkOS","Traversal","Cognichip","StackAI","Eudia","D.E. Shaw","Glean","ClickUp","Optimal","Anthropic"],
+    datasets: [{ label: 'Avg Score', data: [4.4,4.4,4.4,4.3,4.3,4.3,4.3,4.3,4.3,4.25], backgroundColor: PURPLE }],
+  },
+  options: {
+    indexAxis: 'y',
+    ...chartDefaults,
+    scales: {
+      x: { min: 0, max: 5, ticks: { color: '#64748b' }, grid: { color: '#2d3148' } },
+      y: { ticks: { color: '#94a3b8', font: { size: 10 } }, grid: { display: false } },
+    },
+  },
+});
+
+// Daily evaluations
+new Chart(document.getElementById('dailyChart'), {
+  type: 'line',
+  data: {
+    labels: ["2026-04-06","2026-04-07"],
+    datasets: [{ label: 'Evaluations', data: [166,42], borderColor: PURPLE, backgroundColor: 'rgba(124,58,237,0.1)', fill: true, tension: 0.3 }],
+  },
+  options: chartDefaults,
+});
+
+// Location
+new Chart(document.getElementById('locChart'), {
+  type: 'doughnut',
+  data: {
+    labels: ["Unknown","NYC","Remote","SF","LLM & ML","LLMs + Agentic AI","Chicago","YC startup #1","YC startup #2","Minneapolis, MN","NYC Hybrid"],
+    datasets: [{ data: [111,32,44,14,1,1,1,1,1,1,1], backgroundColor: ['#7c3aed','#a855f7','#6366f1','#475569','#1e293b'] }],
+  },
+  options: { plugins: { legend: { labels: { color: '#94a3b8' } } } },
+});
+</script>
+</body>
+</html>

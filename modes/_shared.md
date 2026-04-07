@@ -48,12 +48,12 @@ Classify every offer into one of these types (or hybrid of 2):
 
 | Archetype | Key signals in JD |
 |-----------|-------------------|
-| AI Platform / LLMOps | "observability", "evals", "pipelines", "monitoring", "reliability" |
-| Agentic / Automation | "agent", "HITL", "orchestration", "workflow", "multi-agent" |
-| Technical AI PM | "PRD", "roadmap", "discovery", "stakeholder", "product manager" |
-| AI Solutions Architect | "architecture", "enterprise", "integration", "design", "systems" |
-| AI Forward Deployed | "client-facing", "deploy", "prototype", "fast delivery", "field" |
-| AI Transformation | "change management", "adoption", "enablement", "transformation" |
+| LLM / Generative AI Engineer | "RAG", "fine-tuning", "prompt", "LLM", "embeddings", "vector", "generative" |
+| MLOps / LLMOps Engineer | "observability", "evals", "pipelines", "monitoring", "model serving", "CI/CD", "reliability" |
+| Agentic Systems Engineer | "agent", "HITL", "orchestration", "workflow", "multi-agent", "tool use", "autonomous" |
+| AI Backend / Infrastructure Engineer | "model serving", "inference", "API", "latency", "GPU", "scalability", "backend" |
+| ML Engineer | "training", "fine-tuning", "inference optimization", "model lifecycle", "datasets", "PyTorch", "TensorFlow" |
+| AI Research Engineer | "research", "experimentation", "benchmarks", "novel", "paper", "evaluation", "SOTA" |
 
 After detecting archetype, read `modes/_profile.md` for the user's specific framing and proof points for that archetype.
 
