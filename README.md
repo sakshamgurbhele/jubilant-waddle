@@ -1,4 +1,4 @@
-# AI Powered Job Search (Clone of Career Ops)
+# AI Powered Job Search (Clone of Career-Ops)
 
 > AI-powered job search pipeline built on Claude Code. Evaluate offers intelligently, generate tailored CVs, scan 45+ portals, and track everything — with token-optimized multi-tier AI routing.
 
@@ -23,7 +23,7 @@
 
 ## What Is This
 
-Career-ops turns Claude Code into a full job search command center. It is not a keyword-matching job board scraper. It is an AI reasoning pipeline that reads your CV and evaluates whether a role is genuinely worth your time.
+AI-Powered Job Search turns Claude Code into a full job search command center. It is not a keyword-matching job board scraper. It is an AI reasoning pipeline that reads your CV and evaluates whether a role is genuinely worth your time.
 
 **What it does:**
 
@@ -36,7 +36,7 @@ Career-ops turns Claude Code into a full job search command center. It is not a 
 
 **Why it is different:**
 
-| Typical job search tool | Career-ops |
+| Typical job search tool | AI-Powered Job Search |
 |-------------------------|------------|
 | Keyword matching | AI reasoning against your actual CV |
 | Volume-focused | Quality-first — recommends against anything below 4.0/5 |
@@ -233,25 +233,25 @@ claude
 ### Slash Command Modes
 
 ```
-/career-ops                        → Show all available commands
-/career-ops {paste URL or JD}      → Full auto-pipeline
-/career-ops scan                   → Scan portals for new offers
-/career-ops pdf                    → Generate ATS-optimized CV
-/career-ops batch                  → Batch evaluate multiple offers
-/career-ops tracker                → View application status
-/career-ops apply                  → Fill application forms
-/career-ops pipeline               → Process pending URLs from pipeline.md
-/career-ops contacto               → LinkedIn outreach message
-/career-ops outreach               → Cold outreach campaign
-/career-ops deep                   → Deep company research
-/career-ops negotiate              → Salary negotiation coach
-/career-ops interview              → Interview intelligence briefing
-/career-ops compare                → Compare offers with COL + equity modeling
-/career-ops training               → Evaluate a course or certification
-/career-ops project                → Evaluate a portfolio project
+/AI-Powered Job Search                        → Show all available commands
+/AI-Powered Job Search {paste URL or JD}      → Full auto-pipeline
+/AI-Powered Job Search scan                   → Scan portals for new offers
+/AI-Powered Job Search pdf                    → Generate ATS-optimized CV
+/AI-Powered Job Search batch                  → Batch evaluate multiple offers
+/AI-Powered Job Search tracker                → View application status
+/AI-Powered Job Search apply                  → Fill application forms
+/AI-Powered Job Search pipeline               → Process pending URLs from pipeline.md
+/AI-Powered Job Search contacto               → LinkedIn outreach message
+/AI-Powered Job Search outreach               → Cold outreach campaign
+/AI-Powered Job Search deep                   → Deep company research
+/AI-Powered Job Search negotiate              → Salary negotiation coach
+/AI-Powered Job Search interview              → Interview intelligence briefing
+/AI-Powered Job Search compare                → Compare offers with COL + equity modeling
+/AI-Powered Job Search training               → Evaluate a course or certification
+/AI-Powered Job Search project                → Evaluate a portfolio project
 ```
 
-Or just paste a job URL or description directly — career-ops auto-detects it and runs the full pipeline.
+Or just paste a job URL or description directly — AI-Powered Job Search auto-detects it and runs the full pipeline.
 
 ### Node Scripts
 
@@ -383,7 +383,7 @@ You paste a job URL or description
 ## Project Structure
 
 ```
-career-ops/
+AI-Powered Job Search/
 ├── CLAUDE.md                        # Agent instructions and mode routing
 ├── cv.md                            # Your CV — canonical source of truth (you create this)
 ├── article-digest.md                # Proof points from your portfolio (optional)
