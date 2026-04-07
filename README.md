@@ -1,4 +1,4 @@
-# Career-Ops
+# AI Powered Job Search (Clone of Career Ops)
 
 > AI-powered job search pipeline built on Claude Code. Evaluate offers intelligently, generate tailored CVs, scan 45+ portals, and track everything — with token-optimized multi-tier AI routing.
 
