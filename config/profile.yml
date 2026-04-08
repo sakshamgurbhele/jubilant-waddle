@@ -1,0 +1,67 @@
+# Career-Ops Profile Configuration
+# Copy this file to config/profile.yml and fill in your details.
+# This is the single source of truth for your personal data across all modes.
+
+candidate:
+  full_name: "Saksham Gurbhele"
+  email: "sakshamm@duck.com"
+  phone: "+353899681625"
+  location: "Dublin, Ireland"
+  linkedin: "linkedin.com/in/sakshamgurbhele"
+  portfolio_url: "https://saksham.vercel.app"
+  github: "github.com/sakshamgurbhele"
+  twitter: "https://x.com/sakshamm_9"
+
+target_roles:
+  # Your North Star roles — what you're optimizing for
+  primary:
+    - "Cloud Engineers"
+    - "Software Engineer"
+  # Archetypes help the evaluation system score fit
+  archetypes:
+    - name: "Software Engineer"
+      level: "Junior/Associate"
+      fit: "primary"        # primary = dream role, secondary = good fit, adjacent = stretch
+    - name: "Cloud Engineer"
+      level: "Junior/Associate"
+      fit: "secondary"
+    - name: "Technology Consultant"
+      level: "Junior/Associate"
+      fit: "adjacent"
+
+narrative:
+  # Your professional headline (1 line)
+  headline: "ML Engineer turned AI product builder"
+  # Your exit story — what makes you unique
+  exit_story: "Built and sold my SaaS after 5 years. Now focused on applied AI at scale."
+  # Your top 3-5 superpowers
+  superpowers:
+    - "End-to-end Devops pipelines"
+    - "Fast prototyping (idea to prod in 2 weeks)"
+    - "Cross-functional communication"
+  # Proof points — projects, articles, case studies with measurable impact
+  proof_points:
+    - name: "KubeGreen: A Scheduler for Latency, CPU, and Carbon Optimisation"
+      url: "https://github.com/sakshamgurbhele/KubeGreen"
+      hero_metric: "achieving an average reduction of 15% in carbon emissions and 22% in network latency while maintaining balanced CPU usage across clusters"
+    - name: "FoodieBay: Cloud-Native CI/CD & Infrastructure Automation"
+      url: "https://github.com/sakshamgurbhele/FoodieBay"
+      hero_metric: "Zero manual deployment errors via automated provisioning"
+  # Optional: dashboard/demo URL with credentials
+  # dashboard:
+  #   url: "https://janesmith.dev/demo"
+  #   password: "demo-2026"
+
+compensation:
+  target_range: "42000-70000"     # Your target total comp
+  currency: "EUR"
+  minimum: "38000"               # Walk-away number
+  location_flexibility: "Any"
+
+location:
+  country: "Ireland"
+  city: "Dublin"
+  timezone: "GMT"
+  visa_status: "No sponsorship needed"
+  # For remote roles outside your country:
+  # onsite_availability: "1 week/month in any city"
